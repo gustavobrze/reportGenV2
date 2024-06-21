@@ -2,8 +2,6 @@ import fpdf
 from base import generateReport
 from datetime import datetime as dt
 import streamlit as st
-import tkinter as tk
-from tkinter import filedialog
 import os
 
 @st.cache_data
@@ -67,14 +65,5 @@ def genPDF(sheet, client):
 
     # Combinar nome do arquivo e diretório de salvamento
 
-    #savepath = select_folder()
     # Salvar o PDF
     return pdf.output('temp.pdf')
-    
-
-'''def select_folder():
-        root = tk.Tk()
-        root.withdraw()
-        savepath = filedialog.asksaveasfilename(master=root, filetypes=[('Arquivo PDF', '*.pdf')])
-        root.destroy()
-        return savepath'''
