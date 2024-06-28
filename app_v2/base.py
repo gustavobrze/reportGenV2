@@ -2,7 +2,6 @@ import pandas as pd
 from datetime import datetime
 from calendar import monthrange
 from workalendar.america.brazil import BrazilBankCalendar
-import locale
 
 def format_base(sheet):
     
@@ -34,12 +33,11 @@ def generateReport(sheet, client):
     calendar = BrazilBankCalendar()
 
     rows = list()
-    
+
     for key, value in eachClient.iterrows():
 
         name = value['NOME CLIENTE']
         cpf = value['CPF ']
-
         init_value = value['VALOR DEPOSITADO ']
         init_date = value['DI APLICAÇÃO']
         final_date = value['DF APLICAÇÃO']
@@ -87,29 +85,29 @@ def generateReport(sheet, client):
 
                 interest_other_months = acc_value * rate
                 acc_value += interest_other_months
-                
-            new_row = [datetime.strftime(init_date, '%d/%m/%Y'), datetime.strftime(final_date, '%d/%m/%Y'), init_value, acc_value]
-            rows.append(new_row)
-            #new_row = {'Data aporte': datetime.strftime(init_date, '%d/%m/%Y'), 'Vencimento': datetime.strftime(final_date, '%d/%m/%Y'), 'Valor aportado': init_value, 'Valor atual': acc_value}
-            #rent_cliente = rent_cliente.append(new_row, ignore_index=True)
             
+            new_row = [datetime.strftime(init_date, '%d/%m/%Y'), datetime.strftime(final_date, '%d/%m/%Y'), init_value, acc_value]
+            #rent_cliente = rent_cliente.append(new_row, ignore_index=True)
+            rows.append(new_row)
+
         else:
             pass
-    rent_cliente = pd.DataFrame(columns=['Data aporte', 'Vencimento', 'Valor aportado', 'Valor atual'], data=rows)
     
+    rent_cliente = pd.DataFrame(columns=['Data aporte', 'Vencimento', 'Valor aportado', 'Valor atual'], data=rows)
+
     total_init = 0
     total_acc = 0
 
     for v1, v2 in zip(rent_cliente['Valor atual'], rent_cliente['Valor aportado']):
         total_acc += v1
         total_init += v2
-    
+    '''
     locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
     rent_cliente['Valor aportado'] = [locale.currency(x, grouping=True) for x in rent_cliente['Valor aportado']]
     rent_cliente['Valor atual'] = [locale.currency(x, grouping=True) for x in rent_cliente['Valor atual']]
 
     total_init = locale.currency(total_init, grouping=True)
-    total_acc = locale.currency(total_acc, grouping=True)
+    total_acc = locale.currency(total_acc, grouping=True)'''
 
     return [name, cpf, i, rent_cliente, total_init, total_acc]
