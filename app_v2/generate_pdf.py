@@ -32,7 +32,7 @@ def genPDF(sheet, client):
 
     # Nome, CPF e data de hoje centralizados
     pdf.ln(20)
-    pdf.set_x(40)  # Posicione o cursor no centro da página
+    pdf.set_x(10)  # Posicione o cursor no centro da página
     pdf.set_font('Arial', 'B', 10)
     pdf.cell(0, 10, f'Cliente: {name}')
     pdf.set_x(140)
@@ -42,7 +42,7 @@ def genPDF(sheet, client):
 
     pdf.set_x(10)
     pdf.cell(0, 10, f'Valor Aportado: {format_currency(vi)}')
-    pdf.set_x(150)
+    pdf.set_x(140)
     pdf.cell(0, 10, f'Valor Atual: {format_currency(vacc)}')
 
     pdf.ln(30)
