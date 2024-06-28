@@ -85,13 +85,16 @@ def generateReport(sheet, client):
 
                 interest_other_months = acc_value * rate
                 acc_value += interest_other_months
-
-            new_row = {'Data aporte': datetime.strftime(init_date, '%d/%m/%Y'), 'Vencimento': datetime.strftime(final_date, '%d/%m/%Y'), 'Valor aportado': init_value, 'Valor atual': acc_value}
-            rent_cliente = rent_cliente.append(new_row, ignore_index=True)
+                
+            new_row = [datetime.strftime(init_date, '%d/%m/%Y'), datetime.strftime(final_date, '%d/%m/%Y'), init_value, acc_value]
+            rows.append(new_row)
+            #new_row = {'Data aporte': datetime.strftime(init_date, '%d/%m/%Y'), 'Vencimento': datetime.strftime(final_date, '%d/%m/%Y'), 'Valor aportado': init_value, 'Valor atual': acc_value}
+            #rent_cliente = rent_cliente.append(new_row, ignore_index=True)
             
         else:
             pass
-
+    rent_cliente = pd.DataFrame(columns=['Data aporte', 'Vencimento', 'Valor aportado', 'Valor atual'], data=rows)
+    
     total_init = 0
     total_acc = 0
 
