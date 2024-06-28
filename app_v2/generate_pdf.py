@@ -2,7 +2,12 @@ import fpdf
 from base import generateReport
 from datetime import datetime as dt
 import streamlit as st
-import os
+
+def format_currency(value):
+    value = f"R${value:,.2f}"
+    value = value.split('.')
+    value_final = value[0].replace(',','.') + "," + value[1]
+    return value_final
 
 @st.cache_data
 def genPDF(sheet, client):
@@ -16,7 +21,8 @@ def genPDF(sheet, client):
 
     # Crie um objeto FPDF
     pdf = fpdf.FPDF()
-
+    c = format_currency(vi)
+    print(c)
     # Defina o formato da página
     pdf.add_page()
     pdf.image('logo.png', x=90, y=00, w=30, h=30)
@@ -27,11 +33,10 @@ def genPDF(sheet, client):
 
     # Nome, CPF e data de hoje centralizados
     pdf.ln(20)
-    pdf.set_x(10)  # Posicione o cursor no centro da página
+    pdf.set_x(60)  # Posicione o cursor no centro da página
     pdf.set_font('Arial', 'B', 10)
     pdf.cell(0, 10, f'Cliente: {name}')
-    pdf.set_x(90)
-    pdf.set_x(160)
+    pdf.set_x(120)
     pdf.cell(0, 10, f'Data: {dt.today().strftime("%d/%m/%Y")}')
 
     pdf.ln(20)
@@ -39,9 +44,9 @@ def genPDF(sheet, client):
     pdf.set_x(10)
     pdf.cell(0, 10, f'Rentabilidade Contratada: {i}')
     pdf.set_x(80)
-    pdf.cell(0, 10, f'Valor Aportado: {vi}')
+    pdf.cell(0, 10, f'Valor Aportado: {format_currency(vi)}')
     pdf.set_x(150)
-    pdf.cell(0, 10, f'Valor Atual: {vacc}')
+    pdf.cell(0, 10, f'Valor Atual: {format_currency(vacc)}')
 
     pdf.ln(30)
 
@@ -60,10 +65,14 @@ def genPDF(sheet, client):
     for index, row in df.iterrows():
         pdf.set_x(25)
         for col_index, value in enumerate(row):
-            pdf.cell(40, 5, str(value), border=1, align='C', fill=True)
+            if type(value) == float or type(value) == int:
+                pdf.cell(40, 5, str(format_currency(value)), border=1, align='C', fill=True)
+            else:
+                pdf.cell(40, 5, str(value), border=1, align='C', fill=True)
         pdf.ln(5)  # Line break after each row
 
     # Combinar nome do arquivo e diretório de salvamento
 
+    #savepath = select_folder()
     # Salvar o PDF
     return pdf.output('temp.pdf')
