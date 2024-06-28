@@ -20,14 +20,14 @@ def genPDF(sheet, client):
     vi = report[4]
     vacc = report[5]
     df = report[3]
-    logo = Image.open('reportGenV2/app_v2/logo.png')
+    
     # Crie um objeto FPDF
     pdf = fpdf.FPDF()
     c = format_currency(vi)
     print(c)
     # Defina o formato da página
     pdf.add_page()
-    pdf.image(logo, x=90, y=00, w=30, h=30)
+    pdf.image('C:\Users\Mesa Operações DMV\OneDrive - DMV AGENTE AUTONOMO DE INVESTIMENTOS LTDA\Área de Trabalho\Mesa RV - Gustavo\Python\relatorios_star', x=90, y=00, w=30, h=30)
     pdf.ln(20)
     pdf.set_font('Arial', 'B', 16)
     pdf.cell(0,10, 'Demonstrativo mensal', align='C')
