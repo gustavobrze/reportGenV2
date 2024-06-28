@@ -14,18 +14,17 @@ def genPDF(sheet, client):
 
     report = generateReport(sheet, client)
     name = report[0]
-    i = report[2]
     vi = report[4]
     vacc = report[5]
     df = report[3]
-    
+
     # Crie um objeto FPDF
     pdf = fpdf.FPDF()
     c = format_currency(vi)
-    
+    print(c)
     # Defina o formato da página
     pdf.add_page()
-    #pdf.image('logo.png', x=90, y=00, w=30, h=30)
+    pdf.image('logo.png', x=90, y=00, w=30, h=30)
     pdf.ln(20)
     pdf.set_font('Arial', 'B', 16)
     pdf.cell(0,10, 'Demonstrativo mensal', align='C')
@@ -42,15 +41,13 @@ def genPDF(sheet, client):
     pdf.ln(20)
 
     pdf.set_x(10)
-    pdf.cell(0, 10, f'Rentabilidade Contratada: {i}')
-    pdf.set_x(80)
     pdf.cell(0, 10, f'Valor Aportado: {format_currency(vi)}')
     pdf.set_x(150)
     pdf.cell(0, 10, f'Valor Atual: {format_currency(vacc)}')
 
     pdf.ln(30)
 
-    pdf.set_x(25)
+    pdf.set_x(5)
     # Print DataFrame header with borders and centered alignment
     pdf.set_fill_color(0, 52, 135)  # Light gray background for header
     pdf.set_text_color(255, 255, 255)  # Black text color
@@ -63,7 +60,7 @@ def genPDF(sheet, client):
     pdf.set_fill_color(255, 255, 255)  # White background for data cells
     pdf.set_text_color(0, 0, 0)  # Black text color
     for index, row in df.iterrows():
-        pdf.set_x(25)
+        pdf.set_x(5)
         for col_index, value in enumerate(row):
             if type(value) == float or type(value) == int:
                 pdf.cell(40, 5, str(format_currency(value)), border=1, align='C', fill=True)
