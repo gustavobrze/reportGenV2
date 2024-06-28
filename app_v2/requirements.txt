@@ -1,3 +1,4 @@
 fpdf
 workalendar
 openpyxl
+PIL
