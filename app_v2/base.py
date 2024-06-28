@@ -33,6 +33,8 @@ def generateReport(sheet, client):
 
     calendar = BrazilBankCalendar()
 
+    rows = list()
+    
     for key, value in eachClient.iterrows():
 
         name = value['NOME CLIENTE']
