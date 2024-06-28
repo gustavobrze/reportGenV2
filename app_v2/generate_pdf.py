@@ -24,7 +24,7 @@ def genPDF(sheet, client):
     print(c)
     # Defina o formato da página
     pdf.add_page()
-    pdf.image('logo.png', x=90, y=00, w=30, h=30)
+    #pdf.image('logo.png', x=90, y=00, w=30, h=30)
     pdf.ln(20)
     pdf.set_font('Arial', 'B', 16)
     pdf.cell(0,10, 'Demonstrativo mensal', align='C')
