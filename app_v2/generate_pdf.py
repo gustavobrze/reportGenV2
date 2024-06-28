@@ -2,6 +2,8 @@ import fpdf
 from base import generateReport
 from datetime import datetime as dt
 import streamlit as st
+import requests as re
+from PIL import Image
 
 def format_currency(value):
     value = f"R${value:,.2f}"
@@ -18,14 +20,14 @@ def genPDF(sheet, client):
     vi = report[4]
     vacc = report[5]
     df = report[3]
-
+    logo = Image.open('reportGenV2/app_v2/logo.png')
     # Crie um objeto FPDF
     pdf = fpdf.FPDF()
     c = format_currency(vi)
     print(c)
     # Defina o formato da página
     pdf.add_page()
-    pdf.image('https://i.postimg.cc/3NVTt9k5/logo.png', x=90, y=00, w=30, h=30)
+    pdf.image(logo, x=90, y=00, w=30, h=30)
     pdf.ln(20)
     pdf.set_font('Arial', 'B', 16)
     pdf.cell(0,10, 'Demonstrativo mensal', align='C')
