@@ -33,10 +33,10 @@ def genPDF(sheet, client):
 
     # Nome, CPF e data de hoje centralizados
     pdf.ln(20)
-    pdf.set_x(60)  # Posicione o cursor no centro da página
+    pdf.set_x(40)  # Posicione o cursor no centro da página
     pdf.set_font('Arial', 'B', 10)
     pdf.cell(0, 10, f'Cliente: {name}')
-    pdf.set_x(120)
+    pdf.set_x(140)
     pdf.cell(0, 10, f'Data: {dt.today().strftime("%d/%m/%Y")}')
 
     pdf.ln(20)
