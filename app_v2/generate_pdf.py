@@ -25,7 +25,7 @@ def genPDF(sheet, client):
     print(c)
     # Defina o formato da página
     pdf.add_page()
-    #pdf.image('https://onedrive.live.com/?authkey=%21AMrwh0YRM5%2DLCjs&cid=135A895A09103116&id=135A895A09103116%21782&parId=135A895A09103116%21688&o=OneUp', x=90, y=00, w=30, h=30)
+    pdf.image('reportGenV2/app_v2/logo.png', x=90, y=00, w=30, h=30)
     pdf.ln(20)
     pdf.set_font('Arial', 'B', 16)
     pdf.cell(0,10, 'Demonstrativo mensal', align='C')
