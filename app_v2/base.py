@@ -42,6 +42,7 @@ def generateReport(sheet, client):
         init_date = value['DI APLICAÇÃO']
         final_date = value['DF APLICAÇÃO']
         i = value['RENTABILIDADE CONTRATADA']
+        i_str = i
 
         if "," in i:
             i = i.replace(',','.')
@@ -86,14 +87,14 @@ def generateReport(sheet, client):
                 interest_other_months = acc_value * rate
                 acc_value += interest_other_months
             
-            new_row = [datetime.strftime(init_date, '%d/%m/%Y'), datetime.strftime(final_date, '%d/%m/%Y'), init_value, acc_value]
+            new_row = [datetime.strftime(init_date, '%d/%m/%Y'), datetime.strftime(final_date, '%d/%m/%Y'), init_value, acc_value, i_str]
             #rent_cliente = rent_cliente.append(new_row, ignore_index=True)
             rows.append(new_row)
 
         else:
             pass
     
-    rent_cliente = pd.DataFrame(columns=['Data aporte', 'Vencimento', 'Valor aportado', 'Valor atual'], data=rows)
+    rent_cliente = pd.DataFrame(columns=['Data aporte', 'Vencimento', 'Valor aportado', 'Valor atual', 'Rentabilidade'], data=rows)
 
     total_init = 0
     total_acc = 0
