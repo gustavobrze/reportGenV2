@@ -2,8 +2,6 @@ import fpdf
 from base import generateReport
 from datetime import datetime as dt
 import streamlit as st
-import requests as re
-from PIL import Image
 
 def format_currency(value):
     value = f"R${value:,.2f}"
