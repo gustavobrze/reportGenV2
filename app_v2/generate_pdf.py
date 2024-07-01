@@ -20,11 +20,10 @@ def genPDF(sheet, client):
 
     # Crie um objeto FPDF
     pdf = fpdf.FPDF()
-    c = format_currency(vi)
-    print(c)
+    
     # Defina o formato da página
     pdf.add_page()
-    #pdf.image('logo.png', x=90, y=00, w=30, h=30)
+    pdf.image('logo.png', x=90, y=00, w=30, h=30)
     pdf.ln(20)
     pdf.set_font('Arial', 'B', 16)
     pdf.cell(0,10, 'Demonstrativo mensal', align='C')
@@ -35,14 +34,14 @@ def genPDF(sheet, client):
     pdf.set_x(10)  # Posicione o cursor no centro da página
     pdf.set_font('Arial', 'B', 10)
     pdf.cell(0, 10, f'Cliente: {name}')
-    pdf.set_x(140)
+    pdf.set_x(150)
     pdf.cell(0, 10, f'Data: {dt.today().strftime("%d/%m/%Y")}')
 
     pdf.ln(20)
 
     pdf.set_x(10)
     pdf.cell(0, 10, f'Valor Aportado: {format_currency(vi)}')
-    pdf.set_x(140)
+    pdf.set_x(150)
     pdf.cell(0, 10, f'Valor Atual: {format_currency(vacc)}')
 
     pdf.ln(30)
